@@ -1,3 +1,25 @@
+## Deploy Node-Service in Kubernetes Default Namespace
+
+kubectl -n default create deploy node-app --image vchaudh3/node-service:v1 
+kubectl -n default expose deploy node-app --name node-service --port 5000
+
+
+
+
+## Within /src/main/java/com/devsecops/NumericController.java  
+## use node-service:5000/plusone as baseURL and 
+## comment the localhost:5000
+
+private static final String baseURL = "http://node-service:5000/plusone";
+//private static final String baseURL = "http://localhost:5000/plusone";
+
+
+
+
+
+### Jenkinsfile - added Kubernetes Deployment - DEV Stage
+## replace  vchaudh3 with your dockerhub username
+
 pipeline {
   agent any
 
@@ -26,8 +48,8 @@ pipeline {
       steps {
         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
           sh 'printenv'
-          sh 'docker build -t siddharth67/numeric-app:""$GIT_COMMIT"" .'
-          sh 'docker push siddharth67/numeric-app:""$GIT_COMMIT""'
+          sh 'docker build -t vchaudh3/numeric-app:""$GIT_COMMIT"" .'
+          sh 'docker push vchaudh3/numeric-app:""$GIT_COMMIT""'
         }
       }
     }
