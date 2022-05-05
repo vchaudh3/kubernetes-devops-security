@@ -35,7 +35,18 @@ pipeline {
    
     stage('SonarQube - SAST') {
       steps {
-        sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops-demo-29042022.eastus.cloudapp.azure.com:9000 -Dsonar.login=0f527fb0b38147869297d392603f4237c860d52f"
+        withSonarQubeEnv('SonarQube') {
+          sh "mvn sonar:sonar \
+		              -Dsonar.projectKey=numeric-application \
+					  -Dsonar.host.url=http://devsecops-demo-29042022.eastus.cloudapp.azure.com:9000 \
+					  -Dsonar.login=0f527fb0b38147869297d392603f4237c860d52f"
+					  
+        }
+        timeout(time: 2, unit: 'MINUTES') {
+          script {
+            waitForQualityGate abortPipeline: true
+          }
+        }
       }
     }
 
