@@ -1,7 +1,7 @@
 fileignoreconfig:
 - filename: .vs/slnx.sqlite
-  checksum: 7d8c4a8d1e18329b0025b74842b712cee2112427d94119ab26c37c07d054bd74
+  checksum: a675f7f41842307dcad5c3d168f3a44c3e3d2794c5aa1df035a3666574a210ea
 - filename: Jenkinsfile
-  checksum: 09d534ef32b72b49cc88b46289d9b6704d818b909bc6796755782e56e9d355c6
+  checksum: 4fbf88734cbb1fdd6d0d76970403e9b35155c3bb17be91f0259ce0ab7fd7b6a5
 version: ""
 
