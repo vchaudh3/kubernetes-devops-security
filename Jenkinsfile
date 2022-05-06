@@ -16,8 +16,8 @@ pipeline {
       }
       post {
         always {
-          junit 'target/surefire-reports/*.xml'
-          jacoco execPattern: 'target/jacoco.exec'
+          //junit 'target/surefire-reports/*.xml'
+          //jacoco execPattern: 'target/jacoco.exec'
         }
       }
     }
@@ -28,7 +28,7 @@ pipeline {
       }
       post {
         always {
-          pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+          //pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
         }
       }
     }
@@ -78,6 +78,22 @@ pipeline {
       }
     }
     
+  }
+  post {
+    always {
+      junit 'target/surefire-reports/*.xml'
+      jacoco execPattern: 'target/jacoco.exec'
+      pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+      //dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+    }
+
+    // success {
+
+    // }
+
+    // failure {
+
+    // }
   }
 
 }
