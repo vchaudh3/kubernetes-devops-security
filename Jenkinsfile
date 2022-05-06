@@ -47,7 +47,7 @@ pipeline {
         }
       }
     }
-
+/*
     stage('Vulnerability Scan - Docker ') {
       steps {
         sh "mvn dependency-check:check"
@@ -58,7 +58,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
