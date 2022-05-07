@@ -1,6 +1,15 @@
 pipeline {
   agent any
 
+  environment {
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName = "vchaudh3/numeric-app:${GIT_COMMIT}"
+    applicationURL = "http://devsecops-demo-29042022.eastus.cloudapp.azure.com/"
+    applicationURI = "/increment/99"
+  }
+
   stages {
 
     stage('Build Artifact - Maven') {
@@ -78,6 +87,7 @@ pipeline {
       }
     }
 
+/*
     stage('Vulnerability Scan - Kubernetes') {
       steps {
         sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
@@ -92,8 +102,30 @@ pipeline {
         }
       }
     }
-    
+*/
+
+    stage('K8S Deployment - DEV') {
+      steps {
+        parallel(
+          "Deployment": {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "bash k8s-deployment.sh"
+            }
+          },
+          "Rollout Status": {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "bash k8s-deployment-rollout-status.sh"
+            }
+          }
+        )
+      }
+    }
+
+
   }
+
+
+
   post {
     always {
       junit 'target/surefire-reports/*.xml'
