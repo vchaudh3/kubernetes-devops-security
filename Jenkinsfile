@@ -48,6 +48,15 @@ pipeline {
       }
     }
 */
+
+    stage('Trivy Scan - Docker') {
+      steps {
+          "Trivy Scan": {
+            sh "bash trivy-docker-image-scan.sh"
+          }
+      }
+    }
+
     stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
