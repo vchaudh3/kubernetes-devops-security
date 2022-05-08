@@ -1,5 +1,4 @@
-#################################### Updated k8s_deployment_service.yaml #################################### 
-
+############### Updated k8s_deployment_service.yaml ############### 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,14 +16,12 @@ spec:
       labels:
         app: devsecops
     spec:
-      serviceAccountName: default
       containers:
       - image: replace
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
-          runAsUser: 100
-          readOnlyRootFilesystem: true
+          #runAsUser: 100
 ---
 apiVersion: v1
 kind: Service
@@ -41,4 +38,4 @@ spec:
     app: devsecops
   type: NodePort
 
-#################################### Updated k8s_deployment_service.yaml #################################### 
+############### Updated k8s_deployment_service.yaml ############### 
