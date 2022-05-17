@@ -11,9 +11,10 @@ echo $(id -u):$(id -g)
 
 #docker run -u zap -p 8095:8080 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
 #docker run --rm -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true
-docker run --rm -u zap -p 8091:8089 -d owasp/zap2docker-stable zap.sh -daemon -port 8089 -host 0.0.0.0 -config api.disablekey=true
+#docker run --rm -u zap -p 8091:8089 -d owasp/zap2docker-stable zap.sh -daemon -port 8089 -host 0.0.0.0 -config api.disablekey=true
 #docker run --rm -u zap -p 8092:8091 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html -daemon -port 8091 -host 0.0.0.0 -config api.disablekey=true
 #docker run -u zap -p 8092:8091 -daemon -port 8091 -host 0.0.0.0 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
+docker run -p 8094:8093 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
 
 exit_code=$?
 
