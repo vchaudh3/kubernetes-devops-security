@@ -15,12 +15,13 @@ echo $(id -u):$(id -g)
 #docker run --rm -u zap -p 8092:8091 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html -daemon -port 8091 -host 0.0.0.0 -config api.disablekey=true
 #docker run -u zap -p 8092:8091 -daemon -port 8091 -host 0.0.0.0 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
 #docker run -p 8094:8093 -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
-docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t http://devsecops-demo-29042022.eastus.cloudapp.azure.com:31186/v3/api-docs -f openapi -r zap_report.html
+#docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t http://devsecops-demo-29042022.eastus.cloudapp.azure.com:31186/v3/api-docs -f openapi -r zap_report.html
 
 exit_code=$?
 
 # comment above cmd and uncomment below lines to run with CUSTOM RULES
-# docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -c zap-rules -w report.md -J json_report.json -r zap_report.html
+#docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -c zap-rules -w report.md -J json_report.json -r zap_report.html
+docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t http://devsecops-demo-29042022.eastus.cloudapp.azure.com:31186/v3/api-docs -f openapi -c zap-rules -w report.md -J json_report. -r zap_report.html
 
 # HTML Report
  sudo mkdir -p owasp-zap-report
