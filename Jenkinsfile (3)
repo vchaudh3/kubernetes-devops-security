@@ -14,12 +14,6 @@ pipeline {
 
   stages {
 
-      stage('Testing Slack') {
-      steps {
-        sh 'exit 1'
-      }
-    }
-
     stage('Build Artifact - Maven') {
       steps {
         sh "mvn clean package -DskipTests=true"
