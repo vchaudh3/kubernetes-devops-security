@@ -14,11 +14,11 @@ pipeline {
 
   stages {
 
-      stage('Testing Slack') {
+     /* stage('Testing Slack') {
       steps {
         sh 'exit 0'
       }
-    }
+    } */
 
     stage('Build Artifact - Maven') {
       steps {
@@ -158,6 +158,26 @@ stage('Prompte to PROD?') {
     }
   }
 }
+
+    stage('K8S CIS Benchmark') {
+      steps {
+        script {
+
+          parallel(
+            "Master": {
+              sh "bash cis-master.sh"
+            },
+            "Etcd": {
+              sh "bash cis-etcd.sh"
+            },
+            "Kubelet": {
+              sh "bash cis-kubelet.sh"
+            }
+          )
+
+        }
+      }
+    }
 
 
   }
