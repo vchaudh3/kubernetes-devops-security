@@ -8,7 +8,8 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "vchaudh3/numeric-app:${GIT_COMMIT}"
-    applicationURL = "http://devsecops-demo-29042022.eastus.cloudapp.azure.com/"
+    //applicationURL = "http://devsecops-demo-29042022.eastus.cloudapp.azure.com/"
+    applicationURL = "http://devsecops-demo-29042022.eastus.cloudapp.azure.com"
     applicationURI = "/increment/99"
   }
 
@@ -203,7 +204,7 @@ stage('Prompte to PROD?') {
         script {
           try {
             withKubeConfig([credentialsId: 'kubeconfig']) {
-              sh "bash integration-test-PROD.sh"
+              sh "bash -x integration-test-PROD.sh"
             }
           } catch (e) {
             withKubeConfig([credentialsId: 'kubeconfig']) {
