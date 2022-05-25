@@ -1,5 +1,3 @@
-################# Update JENKINSFILE ####################
-
 @Library('slack') _
 
 /////// ******************************* Code for fectching Failed Stage Name ******************************* ///////
