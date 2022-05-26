@@ -58,13 +58,13 @@ pipeline {
   }
 
   stages {
-/*
-    stage('Testing Slack - 1') {
+
+    stage('Testing Slack - Pass Stage') {
       steps {
         sh 'exit 0'
       }
     }
-*/
+
     stage('Testing Slack - Error Stage') {
       steps {
         sh 'exit 1'
