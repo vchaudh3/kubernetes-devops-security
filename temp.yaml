@@ -1,0 +1,5 @@
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+                - devsecops-demo-29042022.eastus.cloudapp.azure.com:9093
